@@ -1,0 +1,15 @@
+# SECRET_KEY = "123"
+
+POSTGRES_USER = "kolya"
+POSTGRES_PASSWORD = "123"
+POSTGRES_SERVER = "localhost"
+POSTGRES_PORT = "5432"
+POSTGRES_DB = "tdisk"
+
+SQLALCHEMY_DATABASE_URL = f"postgresql://{POSTGRES_USER}:" \
+                          f"{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:" \
+                          f"{POSTGRES_PORT}/{POSTGRES_DB}"
+
+
+LDAP_HOST = "127.0.0.1"
+LDAP_PORT = 389

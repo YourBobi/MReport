@@ -1,0 +1,110 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+  <link href="{{ url_for('static', path='/css/table.css') }}" rel="stylesheet">
+{% endblock %} 
+
+
+{% block content %}
+<div  class="table_container">
+    <h1>Отчет №1</h1>
+</div>
+<div class="table_container">
+    <form name="SearchForm" action="/report/1/user" method="post" id="form"
+            onsubmit="return validateForm(' {{ url_for('static', path='/images/cat1.gif')}} ')">
+
+        <label class="custom-field two">
+            <input name="phone_number" id="phone_number"
+                 value="{{form.phone_number}}" type="text"  placeholder=" "
+                onkeypress="validateInputPhone(event)" maxlength="15"/>
+            <span class="my_placeholder">Номер телефона</span>
+        </label>
+
+        <label class="custom-field two">
+              <input name="identify_number" id="identify_number"
+                     value="{{form.identify_number}}" type="search" placeholder=" "
+                    onkeypress="validateInputPNumber(event)"/>
+              <span class="my_placeholder">Идентификационный номер</span>
+        </label>
+
+        <label class="custom-field two">
+          <input name="abs_number" id="abs_number"
+                 value="{{form.abs_number}}" type="search" placeholder=" "
+                onkeypress="validateInputABC(event)"/>
+          <span class="my_placeholder">ABC номер</span>
+        </label>
+
+        <label class="custom-field two">
+          <input name="data_from" id="data_from"
+                 value="{{ form.data_from}}" type="datetime-local" placeholder=" "
+                    min="2018-02-20T00:00"/>
+          <span class="my_placeholder">Дата с</span>
+        </label>
+
+        <label class="custom-field two">
+          <input name="data_to" id="data_to"
+                 value="{{ form.data_to}}"
+                  type="datetime-local" placeholder=" "
+                    min="2018-02-20T00:00"/>
+          <span class="my_placeholder">Дата по</span>
+        </label>
+        <input name="button" id="button" class="btn btn-primary btn-lg btn-block" type="submit" value="Search">
+    </form>
+</div>
+
+    {% if data %}
+        <div class="table-wrapper" id="report1">
+            <button onclick='downloadFiles("tableID", "report", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;")'
+        class="btn btn-secondary my_button">
+            Save
+        </button>
+
+            <table id="tableID" class="fl-table" >
+            <thead>
+                <tr>
+                    <th>status</th>
+                    <th>type</th>
+                    <th>product_name</th>
+                    <th>payment_sum</th>
+                    <th>currency</th>
+                    <th>service_short_name</th>
+                    <th>create_date</th>
+                    <th>payment_check</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for el in data %}
+                    <tr>
+
+                        <td>{{ el['status'] }}</td>
+                        <td>{{ el['type'] }}</td>
+                        <td>{{ el['product_name'] }}</td>
+                        <td>{{ el['payment_sum'] }}</td>
+                        <td>{{ el['currency'] }}</td>
+                        <td>{{ el['service_short_name'] }}</td>
+                        <td>{{ el['create_date'] }}</td>
+                        <td>{{ el['payment_check'] }}</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+                <tbody> </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="table-wrapper" id="report1">
+            <h2>No info</h2>
+        </div>
+
+{% endif %}
+
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/save_xlsx.js') }}"></script>
+<script src="{{ url_for('static', path='/js/xlsx.full.min.js') }}"></script>
+<script src="{{ url_for('static', path='/js/validate.js') }}"></script>
+<script src="{{ url_for('static', path='/js/get_date.js') }}"></script>
+
+{% endblock %}
+{% endblock %}

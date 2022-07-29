@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', path='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <link href="{{ url_for('static', path='css/headers.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', path='js/drop_down.js') }}"></script>
+
+    <link rel="icon" href="{{ url_for('static', path='images/cat.gif') }}">
+    {% block title %}
+    {% endblock %}
+</head>
+
+<header>
+<nav class="menu">
+  <ol>
+    <li class="menu-item"><a href="/">Home</a></li>
+    <li class="menu-item">
+      <a href="#0">Отчеты</a>
+      <ol class="sub-menu">
+        <li class="menu-item"><a href="/report/1">Поиск по id, номеру телефона, abc</a></li>
+        <li class="menu-item"><a href="/report/1">--------</a></li>
+        <li class="menu-item"><a href="/report/1">--------</a></li>
+      </ol>
+    </li>
+
+    <li class="menu-item"><a href="https://www.mtbank.by/">Сайт банка</a></li>
+  </ol>
+</nav>
+</header>
+<body>
+
+
+    {% block content %}
+    {% endblock %}
+
+
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>-->
+
+    {% block scripts %}
+    {% endblock %}
+
+
+</body>
+</html>
